@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#fff9ee">
+
+  <title>持久走・周回カウンター</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main id="app">
+
+    <!-- 役割選択 -->
+    <section id="roleScreen" class="screen role-screen">
+      <div class="role-panel">
+        <h1>この端末の役割</h1>
+
+        <label class="role-option">
+          <input type="radio" name="role" value="A" checked>
+          <span>A：周回記録・設定（親機）</span>
+        </label>
+
+        <label class="role-option">
+          <input type="radio" name="role" value="B">
+          <span>B：ゴール記録</span>
+        </label>
+
+        <label class="field-label" for="roomKey">接続キー</label>
+
+        <input
+          id="roomKey"
+          class="key-input"
+          type="text"
+          autocomplete="off"
+          autocapitalize="characters"
+          spellcheck="false"
+          placeholder="Aに表示されるキー"
+          disabled
+        >
+
+        <p class="role-help">
+          Aを先に起動してください。<br>
+          BはAの画面に表示される接続キーを入力します。<br>
+          Aの接続情報はこのブラウザーに保存されます。
+        </p>
+
+        <button id="launchButton" class="launch-button" type="button">
+          起動
+        </button>
+
+        <p id="roleError" class="error-message" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- 接続情報 -->
+    <header id="connectionHeader" class="connection-header hidden">
+      <div class="connection-top">
+        <div id="connectionInfo" class="connection-info"></div>
+
+        <button id="leaveButton" class="small-button" type="button">
+          役割選択へ
+        </button>
+      </div>
+
+      <div id="connectionStatus" class="connection-status"></div>
+      <div id="notice" class="notice" aria-live="polite"></div>
+    </header>
+
+    <!-- 人数選択 -->
+    <section id="setupScreen" class="screen setup-screen hidden">
+      <div class="setup-heading">
+        <h1>持久走・周回カウンター</h1>
+        <p>それぞれのペースで、最後まで走ろう！</p>
+      </div>
+
+      <div class="illustration-wrap" aria-hidden="true">
+        <svg class="illustration" viewBox="0 0 700 260">
+          <rect width="700" height="260" rx="20" fill="#e8f8ff"></rect>
+          <circle cx="590" cy="55" r="30" fill="#ffd66f"></circle>
+
+          <ellipse cx="350" cy="205" rx="290" ry="48" fill="#f6c9a8"></ellipse>
+          <ellipse cx="350" cy="200" rx="225" ry="25" fill="#d8f2c5"></ellipse>
+
+          <g transform="translate(220 95)">
+            <circle cx="0" cy="0" r="22" fill="#ffe1c5"></circle>
+            <path d="M-20 24 H20 L25 70 H-25 Z" fill="#71cff0"></path>
+            <path d="M-12 70 L-32 105 M12 70 L35 100"
+              stroke="#54758a" stroke-width="10" stroke-linecap="round"></path>
+            <path d="M-20 35 L-42 50 M20 35 L42 20"
+              stroke="#ffe1c5" stroke-width="9" stroke-linecap="round"></path>
+          </g>
+
+          <g transform="translate(350 85)">
+            <circle cx="0" cy="0" r="22" fill="#ffe1c5"></circle>
+            <path d="M-20 24 H20 L25 70 H-25 Z" fill="#ff9cb6"></path>
+            <path d="M-12 70 L-32 105 M12 70 L35 100"
+              stroke="#54758a" stroke-width="10" stroke-linecap="round"></path>
+            <path d="M-20 35 L-42 20 M20 35 L42 50"
+              stroke="#ffe1c5" stroke-width="9" stroke-linecap="round"></path>
+          </g>
+
+          <g transform="translate(480 95)">
+            <circle cx="0" cy="0" r="22" fill="#ffe1c5"></circle>
+            <path d="M-20 24 H20 L25 70 H-25 Z" fill="#ffd66f"></path>
+            <path d="M-12 70 L-32 105 M12 70 L35 100"
+              stroke="#54758a" stroke-width="10" stroke-linecap="round"></path>
+            <path d="M-20 35 L-42 50 M20 35 L42 20"
+              stroke="#ffe1c5" stroke-width="9" stroke-linecap="round"></path>
+          </g>
+        </svg>
+      </div>
+
+      <div class="setup-controls">
+        <label for="studentCount">ランナーの人数</label>
+
+        <input
+          id="studentCount"
+          type="number"
+          min="1"
+          max="40"
+          value="20"
+          inputmode="numeric"
+        >
+
+        <span>名</span>
+      </div>
+
+      <button id="prepareButton" class="next-button" type="button">
+        次の画面へ ▶
+      </button>
+
+      <p class="setup-help">
+        A：設定・スタート・通常の周回記録<br>
+        B：残り1周からの最後の−1<br>
+        Aが画面を進めると、Bも同じ画面に切り替わります。
+      </p>
+    </section>
+
+    <!-- 記録画面 -->
+    <section id="counterScreen" class="screen counter-screen hidden">
+      <div class="counter-toolbar">
+        <h1>持久走・周回カウンター</h1>
+
+        <button id="startButton" class="start-button" type="button">
+          ▶ スタート
+        </button>
+
+        <div id="timer" class="timer">00:00.00</div>
+
+        <button id="resetButton" class="small-button reset-button" type="button">
+          計測リセット
+        </button>
+
+        <button id="setupButton" class="small-button" type="button">
+          設定へ
+        </button>
+      </div>
+
+      <div id="counterHelp" class="counter-help"></div>
+      <div id="studentGrid" class="student-grid"></div>
+    </section>
+
+    <!-- ランナー編集 -->
+    <dialog id="editDialog">
+      <form id="editForm">
+        <h2>ランナーの設定</h2>
+
+        <label for="editName">名前</label>
+        <input id="editName" type="text" maxlength="100" required>
+
+        <label for="editTarget">目標周数</label>
+        <input id="editTarget" type="number" min="1" max="9999" required>
+
+        <label class="checkbox-row">
+          <input id="editReset" type="checkbox">
+          <span>残り周数を目標周数に戻す</span>
+        </label>
+
+        <p class="dialog-help">
+          目標周数の変更・リセットで完走記録とリタイヤ状態も解除されます。<br>
+          共通タイマーはリセットされません。<br>
+          完走の押し間違いはAの「＋1」で戻せます。
+        </p>
+
+        <div class="dialog-buttons">
+          <button class="dialog-save" type="submit">保存</button>
+          <button id="cancelEditButton" type="button">キャンセル</button>
+        </div>
+      </form>
+    </dialog>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

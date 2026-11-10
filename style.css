@@ -1,0 +1,567 @@
+:root {
+  font-family:
+    "Hiragino Maru Gothic ProN",
+    "Hiragino Sans",
+    "Yu Gothic",
+    "Meiryo",
+    sans-serif;
+
+  color: #303030;
+  background: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.48;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#app {
+  width: 100%;
+  height: 100dvh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.screen {
+  min-height: 0;
+}
+
+/* 役割選択 */
+
+.role-screen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: #f4f4f4;
+}
+
+.role-panel {
+  width: min(100%, 620px);
+  max-height: 100%;
+  overflow: auto;
+  padding: clamp(16px, 3vw, 28px);
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px #00000012;
+}
+
+.role-panel h1 {
+  margin: 0 0 1em;
+  font-size: clamp(20px, 3vw, 29px);
+  text-align: center;
+}
+
+.role-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  font-size: clamp(16px, 2.2vw, 22px);
+}
+
+.role-option input {
+  width: 20px;
+  height: 20px;
+}
+
+.field-label {
+  display: block;
+  margin: 18px 0 6px;
+  font-weight: bold;
+}
+
+.key-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.role-help {
+  color: #666;
+  font-size: clamp(12px, 1.5vw, 15px);
+  line-height: 1.5;
+}
+
+.launch-button {
+  display: block;
+  width: min(100%, 280px);
+  margin: 12px auto 0;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 7px;
+  background: #f4f4f4;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.error-message {
+  min-height: 1.2em;
+  margin: 8px 0 0;
+  color: #c62828;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* 接続情報 */
+
+.connection-header {
+  flex: 0 0 auto;
+  padding: 5px 10px;
+  background: #edf5fc;
+  color: #355a70;
+}
+
+.connection-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.connection-info {
+  min-width: 0;
+  font-size: clamp(12px, 1.8vw, 19px);
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.connection-status,
+.notice {
+  font-size: clamp(10px, 1.3vw, 14px);
+  line-height: 1.25;
+}
+
+.notice {
+  color: #c62828;
+}
+
+.notice:empty {
+  display: none;
+}
+
+.status-online {
+  color: #286f59;
+}
+
+.status-offline {
+  color: #a45c00;
+}
+
+.small-button {
+  flex: 0 0 auto;
+  padding: 5px 9px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #eee;
+  color: #444;
+  font-size: clamp(11px, 1.3vw, 14px);
+  white-space: nowrap;
+}
+
+.reset-button {
+  background: #fff0df;
+  border-color: #e4b878;
+  color: #8b4b00;
+}
+
+/* 人数選択 */
+
+.setup-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 12px;
+  background: #fff9ee;
+  overflow: hidden;
+}
+
+.setup-heading {
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.setup-heading h1 {
+  margin: 3px 0;
+  color: #355a70;
+  font-size: clamp(20px, 3.2vw, 34px);
+}
+
+.setup-heading p {
+  margin: 3px 0;
+  color: #6b7b87;
+  font-size: clamp(12px, 1.6vw, 17px);
+}
+
+.illustration-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: min(100%, 900px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.illustration {
+  display: block;
+  width: 100%;
+  max-height: 100%;
+}
+
+.setup-controls {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #355a70;
+  font-size: clamp(15px, 2vw, 22px);
+  font-weight: bold;
+}
+
+.setup-controls input {
+  width: 76px;
+  padding: 4px;
+  text-align: center;
+  font-size: clamp(18px, 2.2vw, 25px);
+}
+
+.next-button {
+  flex: 0 0 auto;
+  margin: 8px 0;
+  padding: 8px 35px;
+  border: 0;
+  border-radius: 7px;
+  background: #ff8fad;
+  color: #fff;
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: bold;
+}
+
+.setup-help {
+  flex: 0 0 auto;
+  margin: 2px 0 6px;
+  color: #777;
+  text-align: center;
+  font-size: clamp(10px, 1.3vw, 14px);
+  line-height: 1.3;
+}
+
+/* 記録画面 */
+
+.counter-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.counter-toolbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+}
+
+.counter-toolbar h1 {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: clamp(14px, 2.2vw, 25px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.start-button {
+  flex: 0 0 auto;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 5px;
+  background: #e02020;
+  color: #fff;
+  font-size: clamp(13px, 1.8vw, 20px);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.start-button.running {
+  background: #e8f7df;
+  color: #286f59;
+  opacity: 1;
+}
+
+.timer {
+  flex: 0 0 auto;
+  color: #e02020;
+  font-size: clamp(18px, 2.5vw, 29px);
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.counter-help {
+  flex: 0 0 auto;
+  padding: 3px;
+  color: #666;
+  text-align: center;
+  font-size: clamp(10px, 1.3vw, 14px);
+}
+
+.student-grid {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3px;
+  overflow: hidden;
+}
+
+.student-card {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 28fr 40fr 16fr 16fr;
+  gap: 2px;
+  padding: 2px;
+  background: #087ce5;
+}
+
+.student-card button,
+.student-card .count-cell,
+.student-card .completed-cell {
+  min-width: 0;
+  min-height: 0;
+  padding: 0 2px;
+  border: 0;
+  border-radius: 0;
+  font-weight: bold;
+  text-align: center;
+  overflow: hidden;
+}
+
+.student-card button {
+  cursor: pointer;
+}
+
+.student-card button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.name-cell {
+  background: #ffff80;
+  color: #286f59;
+  font-size: var(--name-size, 16px);
+  overflow-wrap: anywhere;
+}
+
+.count-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: #fff;
+  color: #1477cd;
+  font-size: var(--count-size, 20px);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.count-cell.last,
+.count-cell.finished {
+  color: #e02020;
+}
+
+.count-cell.finished {
+  font-size: var(--name-size, 16px);
+}
+
+.count-cell.retired {
+  background: #f3e8e8;
+  color: #a32d2d;
+  font-size: var(--name-size, 16px);
+}
+
+.retired-card {
+  background: #999;
+}
+
+.count-caption {
+  font-size: 0.48em;
+  line-height: 1;
+}
+
+.minus-cell {
+  background: #7de1f5;
+  color: #1477cd;
+  font-size: var(--button-size, 20px);
+}
+
+.minus-cell.finish-ready {
+  color: #e02020;
+}
+
+.plus-cell {
+  background: #f8bfe8;
+  color: #1477cd;
+  font-size: var(--button-size, 20px);
+}
+
+.minus-cell:disabled,
+.plus-cell:disabled {
+  color: #7697a6;
+}
+
+.completed-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8f7df;
+  color: #286f59;
+  font-size: var(--completed-size, 12px);
+  line-height: 1.05;
+}
+
+/* 編集ダイアログ */
+
+dialog {
+  width: min(92vw, 460px);
+  max-height: 90dvh;
+  padding: 22px;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+}
+
+dialog::backdrop {
+  background: #0007;
+}
+
+dialog h2 {
+  margin-top: 0;
+}
+
+#editForm {
+  display: grid;
+  gap: 8px;
+}
+
+#editForm > input {
+  width: 100%;
+  padding: 8px;
+  font-size: 18px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.checkbox-row input {
+  width: 18px;
+  height: 18px;
+}
+
+.dialog-help {
+  margin: 4px 0;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dialog-buttons button {
+  padding: 8px 18px;
+}
+
+.dialog-save {
+  background: #087ce5;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+}
+
+/* 狭い画面でも操作ボタンを表示 */
+
+@media (max-width: 600px) {
+  .counter-toolbar {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .counter-toolbar h1 {
+    flex-basis: 100%;
+    font-size: 14px;
+  }
+
+  .start-button {
+    padding: 5px 8px;
+  }
+}
+
+@media (max-height: 500px) {
+  .setup-help {
+    display: none;
+  }
+
+  .setup-screen {
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  .next-button {
+    margin: 4px 0;
+    padding: 5px 25px;
+  }
+
+  .connection-header {
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+}
